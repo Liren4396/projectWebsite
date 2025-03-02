@@ -9,6 +9,14 @@ const db = mysql.createConnection({
   database: 'user_db123'
 });
 
+db.connect(err => {
+    if (err) {
+        console.error('数据库连接失败:', err);
+        return;
+    }
+    console.log('成功连接到数据库');
+});
+
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     const { username, email, password } = req.body;

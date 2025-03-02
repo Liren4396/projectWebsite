@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const mysql = require('mysql2');
 const cors = require('cors');
 const bcrypt = require('bcrypt');
@@ -90,4 +90,4 @@ app.post('/api/login', async (req, res) => {
 
 app.listen(port, () => {
   console.log(`服务器运行在 https://project-website-weld.vercel.app:${port}`);
-});
+});*/
