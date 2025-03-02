@@ -6,14 +6,23 @@ const app = express();
 const port = 3001;
 
 // 允许跨域请求
-app.use(cors({
-  origin: '/https:\/\/project-website-amber\.vercel\.app/',
-  methods: ['GET', 'POST'],
+const corsOptions = {
+  origin: 'https://project-website-d7derl701-1029510274-qqcoms-projects.vercel.app', // 允许指定来源
+  methods: ['GET', 'POST', 'OPTIONS'], // 允许的 HTTP 方法
   allowedHeaders: ['Content-Type'],
-  credentials: true
-}));
+  credentials: true, // 允许携带 Cookie
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json());
+
+app.options('*', (req, res) => {
+  res.header('Access-Control-Allow-Origin', 'https://project-website-d7derl701-1029510274-qqcoms-projects.vercel.app');  // 前端域名
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  res.sendStatus(200); // 200 OK 响应
+});
 
 // 连接 MySQL 数据库
 const db = mysql.createConnection({
@@ -32,7 +41,7 @@ db.connect(err => {
 });
 
 // 注册接口
-app.post('/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
   const { username, email, password } = req.body;
   if (!username || !email || !password) {
     return res.status(400).json({ message: '所有字段均为必填项' });
@@ -51,7 +60,7 @@ app.post('/register', async (req, res) => {
 });
 
 // 登录接口
-app.post('/login', async (req, res) => {
+app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
   if (!email || !password) {
     return res.status(400).json({ message: '请输入邮箱和密码' });
