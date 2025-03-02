@@ -14,7 +14,7 @@ function Register() {
     setError('');
 
     try {
-      const response = await fetch('https://project-website-weld.vercel.app/register', {
+      const response = await fetch('https://project-website-weld.vercel.app/api/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

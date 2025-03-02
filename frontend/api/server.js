@@ -7,7 +7,7 @@ const port = 3001;
 
 // 允许跨域请求
 app.use(cors({
-  origin: 'https://project-website-amber.vercel.app/',
+  origin: '/https:\/\/project-website-amber\.vercel\.app/',
   methods: ['GET', 'POST'],
   allowedHeaders: ['Content-Type'],
   credentials: true
@@ -80,5 +80,5 @@ app.post('/login', async (req, res) => {
 });
 
 app.listen(port, () => {
-  console.log(`服务器运行在 http://localhost:${port}`);
+  console.log(`服务器运行在 https://project-website-weld.vercel.app:${port}`);
 });
