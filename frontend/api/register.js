@@ -16,6 +16,16 @@ const dbConfig = {
 // 创建数据库连接池
 const pool = mysql.createPool(dbConfig);
 
+// 创建表格的 SQL 语句
+const createTableQuery = `
+  CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL
+  );
+`;
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ message: '方法不被允许' });
@@ -27,6 +37,9 @@ export default async function handler(req, res) {
   }
 
   try {
+    // 确保 users 表存在，如果没有则创建
+    await pool.query(createTableQuery);
+
     // 检查用户是否已存在（根据邮箱判断）
     const [existingUsers] = await pool.query(
       'SELECT * FROM users WHERE email = ?',
