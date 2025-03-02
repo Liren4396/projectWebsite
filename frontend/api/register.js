@@ -2,7 +2,8 @@ import fs from 'fs';
 import path from 'path';
 import bcrypt from 'bcrypt';
 
-const dataFile = path.join(process.cwd(), 'users.json');
+// 使用 /tmp 目录来存储数据，/tmp 在 Vercel 中是可写的
+const dataFile = path.join('/tmp', 'users.json');
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
@@ -15,13 +16,23 @@ export default async function handler(req, res) {
     const newUser = { username, email, password: hashedPassword };
 
     let users = [];
-    if (fs.existsSync(dataFile)) {
-      const fileData = fs.readFileSync(dataFile, 'utf-8');
-      users = fileData ? JSON.parse(fileData) : [];
+    try {
+      if (fs.existsSync(dataFile)) {
+        const fileData = fs.readFileSync(dataFile, 'utf-8');
+        users = fileData ? JSON.parse(fileData) : [];
+      }
+    } catch (err) {
+      console.error('读取数据文件失败:', err);
     }
 
     users.push(newUser);
-    fs.writeFileSync(dataFile, JSON.stringify(users, null, 2));
+    
+    try {
+      fs.writeFileSync(dataFile, JSON.stringify(users, null, 2));
+    } catch (err) {
+      console.error('写入数据文件失败:', err);
+      return res.status(500).json({ message: '写入数据失败' });
+    }
     
     res.status(201).json({ message: '注册成功' });
   } else {
