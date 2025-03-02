@@ -1,0 +1,80 @@
+/* App.css */
+
+nav {
+  display: flex;
+  justify-content: space-between; /* 使元素分布在两端 */
+  padding: 10px 20px;
+  background-color: #333;
+  align-items: center;
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.logout-button {
+  background: linear-gradient(135deg, #ff7f50, #ff6347);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
+}
+
+.back-button {
+  background: linear-gradient(135deg, #ff7f50, #ff6347);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
+}
+
+.login-button {
+  background: linear-gradient(135deg, #ff7f50, #ff6347);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
+}
+
+.logout-button:hover {
+  background: linear-gradient(135deg, #ff6347, #ff7f50);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(255, 117, 140, 0.5);
+}
+.back-button:hover {
+  background: linear-gradient(135deg, #ff6347, #ff7f50);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(255, 117, 140, 0.5);
+}
+
+.login-button:hover {
+  background: linear-gradient(135deg, #ff6347, #ff7f50);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(255, 117, 140, 0.5);
+}
+
+nav a, .logout-button {
+  color: white;
+  text-decoration: none;
+}
+
+nav a:hover {
+  color: #f4a261;
+  text-decoration: underline;
+}

@@ -1,0 +1,65 @@
+.projects-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(to right, rgba(59, 130, 246, 0.9), rgba(147, 51, 234, 0.9));
+}
+
+.content-box {
+  background: rgba(255, 255, 255, 0.95);
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  text-align: center;
+  max-width: 500px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.content-box:hover {
+  transform: scale(1.03);
+}
+
+h1 {
+  font-size: 2rem;
+  background: linear-gradient(to right, #3b82f6, #9333ea);
+  -webkit-background-clip: text;
+  color: transparent;
+  font-weight: bold;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 15px;
+}
+
+li {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 12px 0;
+  padding: 8px 12px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 10px;
+  transition: background 0.3s, transform 0.2s;
+}
+
+li:hover {
+  background: rgba(0, 0, 0, 0.1);
+  transform: translateY(-3px);
+}
+
+@media (max-width: 600px) {
+  .content-box {
+    width: 90%;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  li {
+    font-size: 1rem;
+  }
+}

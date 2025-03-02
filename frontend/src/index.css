@@ -1,0 +1,42 @@
+/* index.css */
+
+/* 设置所有元素的 margin 和 padding 为 0，去掉浏览器的默认样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* 设置 body 的默认样式 */
+body {
+  font-family: Arial, sans-serif; /* 设置字体 */
+  background-color: #f4f4f4; /* 设置背景色 */
+  color: #333; /* 设置文字颜色 */
+}
+
+/* 应用容器的样式 */
+.App {
+  text-align: center;
+}
+
+/* 样式的过渡效果 */
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+/* 动画效果 */
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
