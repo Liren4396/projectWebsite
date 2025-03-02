@@ -7,7 +7,7 @@ const port = 3001;
 
 // 允许跨域请求
 const corsOptions = {
-  origin: 'https://project-website-d7derl701-1029510274-qqcoms-projects.vercel.app', // 允许指定来源
+  origin: 'https://project-website-weld.vercel.app', // 允许指定来源
   methods: ['GET', 'POST', 'OPTIONS'], // 允许的 HTTP 方法
   allowedHeaders: ['Content-Type'],
   credentials: true, // 允许携带 Cookie
@@ -18,7 +18,7 @@ app.use(cors(corsOptions));
 app.use(express.json());
 
 app.options('*', (req, res) => {
-  res.header('Access-Control-Allow-Origin', 'https://project-website-d7derl701-1029510274-qqcoms-projects.vercel.app');  // 前端域名
+  res.header('Access-Control-Allow-Origin', 'https://project-website-weld.vercel.app');  // 前端域名
   res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.header('Access-Control-Allow-Headers', 'Content-Type');
   res.sendStatus(200); // 200 OK 响应
