@@ -5,8 +5,8 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import AboutMe from './components/AboutMe';
 import HighPerformanceServer from './components/HighPerformanceServer';
-import SqlMovieDb from './components/SqlMovieDb';
-import UnityTowerDefense from './components/UnityTowerDefense';
+import STPSimulation from './components/STP';
+import CppBoostSearch from './components/CppBoostSearch';
 import Login from './components/Login';
 import Register from './components/Register';
 import { UserProvider, useUser } from './components/UserContext'; // 引入 UserContext
@@ -65,8 +65,8 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<AboutMe />} />
           <Route path="/projects/HighPerformanceServer" element={<HighPerformanceServer />} />
-          <Route path="/projects/sql-movie-db" element={<SqlMovieDb />} />
-          <Route path="/projects/unity-tower-defense" element={<UnityTowerDefense />} />
+          <Route path="/projects/STPSimulation" element={<STPSimulation />} />
+          <Route path="/projects/CppBoostSearch" element={<CppBoostSearch />} />
           <Route path="/login" element={<Login />} /> {/* 登录页面 */}
           <Route path="/register" element={<Register />} /> {/* 注册页面 */}
         </Routes>

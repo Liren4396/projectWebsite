@@ -12,10 +12,10 @@ function Projects() {
             <Link to="/projects/HighPerformanceServer">C++ High Performance Server</Link>
           </li>
           <li>
-            <Link to="/projects/sql-movie-db">🎬 SQL Movie Database</Link>
+            <Link to="/projects/STPSimulation">Simple Transport Protocol</Link>
           </li>
           <li>
-            <Link to="/projects/unity-tower-defense">🛡️ Unity Tower Defense Game</Link>
+            <Link to="/projects/CppBoostSearch">C++ CppBoost Search</Link>
           </li>
         </ul>
       </div>
