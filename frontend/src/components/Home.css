@@ -4,6 +4,7 @@
   align-items: center;
   height: 100vh;
   flex-direction: column;
+  padding: 20px;
   background: linear-gradient(to right, #3b82f6, #9333ea);
 }
 
@@ -25,6 +26,7 @@
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
   text-align: center;
   max-width: 500px;
+  
 }
 
 h1 {
@@ -38,17 +40,33 @@ p {
 }
 
 .cpp {
-  color: #3b82f6;
+  color: rgb(236, 74, 74);
   font-weight: bold;
 }
 
 .sql {
-  color: #10b981;
+  color: orange;
   font-weight: bold;
 }
 
 .unity {
-  color: #9333ea;
+  color: rgb(173, 173, 4);
+  font-weight: bold;
+}
+.js {
+  color: rgb(6, 179, 6);
+  font-weight: bold;
+}
+.ts {
+  color: rgb(17, 233, 222);
+  font-weight: bold;
+}
+.shell {
+  color:rgb(83, 71, 255);
+  font-weight:  bold;
+}
+.java {
+  color:purple;
   font-weight: bold;
 }
 
@@ -66,4 +84,27 @@ p {
 
 .learn-more:hover {
   background: #2563eb;
+}
+
+.floating-about-button {
+  margin-top: 20px;
+  margin-left: 300px;
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+  color: white;
+  border: none;
+  padding: 15px 20px;
+  font-size: 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0px 5px 15px rgba(255, 75, 43, 0.4);
+}
+
+.floating-about-button:hover {
+  transform: scale(1.1);
+  box-shadow: 0px 10px 20px rgba(255, 75, 43, 0.6);
+}
+
+.floating-about-button:active {
+  transform: scale(0.95);
 }

@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation, useNavigate } from 'react-router-dom';
 import Home from './components/Home';
 import Projects from './components/Projects';
-import Blog from './components/Blog';
 import Contact from './components/Contact';
 import AboutMe from './components/AboutMe';
 import HighPerformanceServer from './components/HighPerformanceServer';
@@ -37,7 +36,6 @@ function Navigation() {
         <>
           <Link to="/">Home</Link>
           <Link to="/projects">Projects</Link>
-          <Link to="/blog">Blog</Link>
           <Link to="/contact">Contact</Link>
 
           {/* 根据登录状态渲染按钮 */}
@@ -64,7 +62,6 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/projects" element={<Projects />} />
-          <Route path="/blog" element={<Blog />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/about" element={<AboutMe />} />
           <Route path="/projects/HighPerformanceServer" element={<HighPerformanceServer />} />

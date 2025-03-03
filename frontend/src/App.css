@@ -12,6 +12,9 @@ nav {
   display: flex;
   gap: 20px;
 }
+body, html _{
+  background: rgb(125, 228, 253);
+}
 
 .logout-button {
   background: linear-gradient(135deg, #ff7f50, #ff6347);
