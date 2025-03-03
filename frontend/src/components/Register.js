@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLanguage } from './LanguageContext';
 import './Form.css';
 
 function Register() {
   const [username, setUsername] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const { language } = useLanguage();
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
@@ -43,10 +45,10 @@ function Register() {
 
   return (
     <div className="form-container">
-      <h2>Register</h2>
+      <h2>{language === 'en' ? 'Register' : '注册'}</h2>
       <form onSubmit={handleRegister} className="form">
         <div className="form-group">
-          <label>Username:</label>
+          <label>{language === 'en' ? 'Username:' : '用户名'}</label>
           <input
             type="text"
             value={username}
@@ -56,7 +58,7 @@ function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Email:</label>
+          <label>{language === 'en' ? 'Email:' : '邮箱:'}</label>
           <input
             type="email"
             value={email}
@@ -66,7 +68,7 @@ function Register() {
           />
         </div>
         <div className="form-group">
-          <label>Password:</label>
+          <label>{language === 'en' ? 'Password:' : '密码'}</label>
           <input
             type="password"
             value={password}
@@ -76,7 +78,7 @@ function Register() {
           />
         </div>
         {error && <p className="error">{error}</p>}
-        <button type="submit" className="form-button">Register</button>
+        <button type="submit" className="form-button">{language === 'en' ? 'Register' : '注册'}</button>
       </form>
     </div>
   );

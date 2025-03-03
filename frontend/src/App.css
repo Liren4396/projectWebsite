@@ -12,9 +12,16 @@ nav {
   display: flex;
   gap: 20px;
 }
-body, html _{
-  background: rgb(125, 228, 253);
+
+body {
+  font-family: 'Arial', sans-serif;
+  background: linear-gradient(135deg, #6eff99, #ddb152);
 }
+
+body.zh {
+  font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
+}
+
 
 .logout-button {
   background: linear-gradient(135deg, #ff7f50, #ff6347);

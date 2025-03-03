@@ -17,7 +17,6 @@
     text-align: center;
     color: #333;
   }
-  
   .form {
     display: flex;
     flex-direction: column;
@@ -62,6 +61,8 @@
     color: #007BFF;
     cursor: pointer;
     text-decoration: underline;
+    top: 0px;
+    font-size: 20px;
   }
 
   .register-link:hover {

@@ -10,13 +10,14 @@ import CppBoostSearch from './components/CppBoostSearch';
 import Login from './components/Login';
 import Register from './components/Register';
 import { UserProvider, useUser } from './components/UserContext'; // 引入 UserContext
+import { LanguageProvider, useLanguage } from './components/LanguageContext';
 import './App.css';
 
 function Navigation() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // 使用 UserContext 获取和更新 user 状态
-
+  const { language } = useLanguage(); // Use the useLanguage hook
   const handleLogout = () => {
     localStorage.removeItem('user');
     setUser(null); // 更新用户状态
@@ -29,24 +30,24 @@ function Navigation() {
   return (
     <nav>
       {isAboutPage ? (
-        <button onClick={() => navigate('/')} className="back-button">Back</button>
+        <button onClick={() => navigate('/')} className="back-button">
+          {language === 'en' ? 'Back' : '返回'}
+        </button>
       ) : isProjectPage ? (
         <button onClick={() => navigate('/projects')} className="back-button">Back</button>
       ) : (
         <>
-          <Link to="/">Home</Link>
-          <Link to="/projects">Projects</Link>
-          <Link to="/contact">Contact</Link>
-
-          {/* 根据登录状态渲染按钮 */}
+          <Link to="/">{language === 'en' ? 'Home' : '首页'}</Link>
+          <Link to="/projects">{language === 'en' ? 'Projects' : '项目'}</Link>
+          <Link to="/contact">{language === 'en' ? 'Contact' : '联系我'}</Link>
           {!user ? (
             <>
                <Link to="/login">
-                <button className="login-button">Login</button>
+                <button className="login-button">{language === 'en' ? 'Login' : '登录'}</button>
               </Link>
             </>
           ) : (
-            <button onClick={handleLogout} className="logout-button">Logout</button>
+            <button onClick={handleLogout} className="logout-button">{language === 'en' ? 'Logout' : '登出'}</button>
           )}
         </>
       )}
@@ -56,22 +57,24 @@ function Navigation() {
 
 function App() {
   return (
-    <UserProvider>  {/* 包裹应用，提供 user 和 setUser */}
-      <Router>
-        <Navigation />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/projects" element={<Projects />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/about" element={<AboutMe />} />
-          <Route path="/projects/HighPerformanceServer" element={<HighPerformanceServer />} />
-          <Route path="/projects/STPSimulation" element={<STPSimulation />} />
-          <Route path="/projects/CppBoostSearch" element={<CppBoostSearch />} />
-          <Route path="/login" element={<Login />} /> {/* 登录页面 */}
-          <Route path="/register" element={<Register />} /> {/* 注册页面 */}
-        </Routes>
-      </Router>
-    </UserProvider>
+    <LanguageProvider>
+      <UserProvider>  {/* 包裹应用，提供 user 和 setUser */}
+          <Router>
+            <Navigation />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/projects" element={<Projects />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/about" element={<AboutMe />} />
+              <Route path="/projects/HighPerformanceServer" element={<HighPerformanceServer />} />
+              <Route path="/projects/STPSimulation" element={<STPSimulation />} />
+              <Route path="/projects/CppBoostSearch" element={<CppBoostSearch />} />
+              <Route path="/login" element={<Login />} /> {/* 登录页面 */}
+              <Route path="/register" element={<Register />} /> {/* 注册页面 */}
+            </Routes>
+          </Router>
+      </UserProvider>
+    </LanguageProvider>
   );
 }
 

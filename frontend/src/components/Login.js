@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useUser } from './UserContext';  // 引入 UserContext
+import { useLanguage } from './LanguageContext';
 import './Form.css';
 
 function Login() {
@@ -8,6 +9,7 @@ function Login() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const navigate = useNavigate();
+  const { language } = useLanguage();
   const { setUser } = useUser(); // 使用 setUser 更新 user 状态
 
   const handleLogin = async (e) => {
@@ -36,10 +38,10 @@ function Login() {
 
   return (
     <div className="form-container">
-      <h2>Login</h2>
+      <h2>{language === 'en' ? 'Login' : '登录'}</h2>
       <form onSubmit={handleLogin} className="form">
         <div className="form-group">
-          <label>Email:</label>
+          <label>{language === 'en' ? 'Email:' : '邮箱'}</label>
           <input
             type="text"
             value={email}
@@ -49,7 +51,7 @@ function Login() {
           />
         </div>
         <div className="form-group">
-          <label>Password:</label>
+          <label>{language === 'en' ? 'Password:' : '密码'}</label>
           <input
             type="password"
             value={password}
@@ -59,9 +61,9 @@ function Login() {
           />
         </div>
         {error && <p className="error">{error}</p>}
-        <button type="submit" className="form-button">Login</button>
+        <button type="submit" className="form-button">{language === 'en' ? 'Login' : '登录'}</button>
       </form>
-      <p>Not registered? <span onClick={() => navigate('/register')} className="register-link">Click me to register</span></p>
+      <p>{language === 'en' ? 'Not registered?' : '没有账号?'} <span onClick={() => navigate('/register')} className="register-link">{language === 'en' ? 'Click me to register' : '点我注册'}</span></p>
     </div>
   );
 }
