@@ -15,10 +15,14 @@ function Home() {
       setUser(loggedInUser);  // 已登录，更新状态
     }
 
-    fetch('/api/userCount')
-      .then((response) => response.json())
-      .then((data) => setUserCount(data.userCount))
-      .catch((error) => console.error('获取用户总数失败:', error));
+    fetch('https://project-website-weld.vercel.app/api/userCount')
+    .then((response) => response.text())  // 先解析成文本
+    .then((text) => {
+      console.log("API Response:", text); // 打印原始 API 响应
+      return JSON.parse(text); // 尝试手动解析
+    })
+    .then((data) => setUserCount(data.userCount))
+    .catch((error) => console.error('获取用户总数失败:', error));
   }, []);
 
   const handleLogout = () => {

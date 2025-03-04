@@ -21,6 +21,7 @@ export default async function handler(req, res) {
   try {
     // 查询数据库中用户总数
     const [rows] = await pool.query('SELECT COUNT(*) AS userCount FROM users');
+    console.log(rows);
     res.status(200).json({ userCount: rows[0].userCount });
   } catch (err) {
     console.error('数据库查询错误:', err);
