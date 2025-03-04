@@ -5,6 +5,7 @@ import './Home.css';
 
 function Home() {
   const [user, setUser] = useState(null);
+  const [userCount, setUserCount] = useState(0); // 用于存储历史注册人数
   const navigate = useNavigate();
   const { language, toggleLanguage } = useLanguage(); // Use the useLanguage hook
 
@@ -13,6 +14,11 @@ function Home() {
     if (loggedInUser) {
       setUser(loggedInUser);  // 已登录，更新状态
     }
+
+    fetch('/api/userCount')
+      .then((response) => response.json())
+      .then((data) => setUserCount(data.userCount))
+      .catch((error) => console.error('获取用户总数失败:', error));
   }, []);
 
   const handleLogout = () => {
@@ -47,10 +53,18 @@ function Home() {
           <span className="shell">Shell</span>, <span className='java'>Java</span>
         </p>
       </div>
+      
+      <div className="user-count-container">
+        <div className="user-count">
+          {language === 'en' ? `Total registered users: ${userCount}` : `总注册用户数: ${userCount}`}
+        </div>
+        <button className="floating-about-button" onClick={() => navigate('/about')}>
+          {language === 'en' ? 'About Me →' : '关于我 →'}
+        </button>
+      </div>
 
-      <button className="floating-about-button" onClick={() => navigate('/about')}>
-        {language === 'en' ? 'About Me →' : '关于我 →'}
-      </button>
+
+      
 
       {/* Language Toggle Button */}
       <button onClick={toggleLanguage} className="language-toggle-button">
