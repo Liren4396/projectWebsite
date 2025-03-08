@@ -15,7 +15,7 @@ function Home() {
       setUser(loggedInUser);  // 已登录，更新状态
     }
 
-    fetch('https://project-website-weld.vercel.app/api/userCount')
+    fetch('https://liren.online/api/userCount')
     .then((response) => response.text())  // 先解析成文本
     .then((text) => {
       console.log("API Response:", text); // 打印原始 API 响应
