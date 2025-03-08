@@ -11,6 +11,8 @@ import Login from './components/Login';
 import Register from './components/Register';
 import { UserProvider, useUser } from './components/UserContext'; // 引入 UserContext
 import { LanguageProvider, useLanguage } from './components/LanguageContext';
+import ShellGitConstruction from './components/ShellGitConstruction';
+import SuperTicTacToe from './components/SuperTicTacToe';
 import './App.css';
 
 function Navigation() {
@@ -69,6 +71,8 @@ function App() {
               <Route path="/projects/HighPerformanceServer" element={<HighPerformanceServer />} />
               <Route path="/projects/STPSimulation" element={<STPSimulation />} />
               <Route path="/projects/CppBoostSearch" element={<CppBoostSearch />} />
+              <Route path="/projects/ShellGitConstruction" element={<ShellGitConstruction />} />
+              <Route path="/projects/SuperTicTacToe" element={<SuperTicTacToe />} />
               <Route path="/login" element={<Login />} /> {/* 登录页面 */}
               <Route path="/register" element={<Register />} /> {/* 注册页面 */}
             </Routes>

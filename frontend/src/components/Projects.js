@@ -19,6 +19,12 @@ function Projects() {
           <li>
             <Link to="/projects/CppBoostSearch">{language === 'en' ? 'C++ CppBoost Search' : '站内搜索引擎'}</Link>
           </li>
+          <li>
+            <Link to="/projects/ShellGitConstruction">{language === 'en' ? 'Shell Git Construction' : 'Shell 轻量级 Git 仿写'}</Link>
+          </li>
+          <li>
+            <Link to="/projects/SuperTicTacToe">{language === 'en' ? 'Super-Tic-Tac-Toe' : '超级井字棋'}</Link>
+          </li>
         </ul>
       </div>
     </div>
