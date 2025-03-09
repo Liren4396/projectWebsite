@@ -1,6 +1,6 @@
 /* 全局样式，适配背景 */
 body {
-  background: linear-gradient(to right, rgba(93, 195, 34, 0.9), rgba(75, 240, 226, 0.9));
+  background: linear-gradient(to right, rgba(93, 195, 34, 0.9), rgba(136, 236, 228, 0.9));
   margin: 0;
   font-family: Arial, sans-serif;
 }
@@ -8,6 +8,7 @@ body {
 /* 表单容器 */
 .form-container {
   max-width: 400px;
+
   margin: 50px auto;
   padding: 20px;
   background-color: #f9f9f9;
@@ -132,35 +133,5 @@ p {
 
   p {
       font-size: 0.85rem;
-  }
-}
-
-/* 小屏幕（手机） */
-@media (max-width: 480px) {
-  .form-container {
-      max-width: 95%;
-      padding: 15px;
-  }
-
-  h2 {
-      font-size: 1.4rem;
-  }
-
-  .form-input {
-      font-size: 14px;
-      padding: 8px;
-  }
-
-  .form-button {
-      font-size: 14px;
-      padding: 10px;
-  }
-
-  .register-link {
-      font-size: 0.9rem;
-  }
-
-  p {
-      font-size: 0.8rem;
   }
 }

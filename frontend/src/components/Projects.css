@@ -67,23 +67,3 @@ li:hover {
     font-size: 1.1rem;
   }
 }
-
-@media (max-width: 600px) {
-  .projects-container {
-    height: auto;
-    padding: 20px;
-  }
-
-  .content-box {
-    width: 100%;
-    padding: 15px;
-  }
-
-  h1 {
-    font-size: 1.6rem;
-  }
-
-  li {
-    font-size: 1rem;
-  }
-}
