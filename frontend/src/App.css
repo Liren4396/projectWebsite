@@ -22,7 +22,8 @@ body.zh {
   font-family: 'Microsoft YaHei', '微软雅黑', sans-serif;
 }
 
-.logout-button, .back-button, .login-button {
+
+.logout-button {
   background: linear-gradient(135deg, #ff7f50, #ff6347);
   color: white;
   font-size: 16px;
@@ -35,7 +36,44 @@ body.zh {
   box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
 }
 
-.logout-button:hover, .back-button:hover, .login-button:hover {
+.back-button {
+  background: linear-gradient(135deg, #ff7f50, #ff6347);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
+}
+
+.login-button {
+  background: linear-gradient(135deg, #ff7f50, #ff6347);
+  color: white;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
+}
+
+.logout-button:hover {
+  background: linear-gradient(135deg, #ff6347, #ff7f50);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(255, 117, 140, 0.5);
+}
+.back-button:hover {
+  background: linear-gradient(135deg, #ff6347, #ff7f50);
+  transform: scale(1.05);
+  box-shadow: 0 6px 12px rgba(255, 117, 140, 0.5);
+}
+
+.login-button:hover {
   background: linear-gradient(135deg, #ff6347, #ff7f50);
   transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(255, 117, 140, 0.5);
@@ -49,29 +87,4 @@ nav a, .logout-button {
 nav a:hover {
   color: #f4a261;
   text-decoration: underline;
-}
-
-/* 移动端适配 */
-@media (max-width: 768px) {
-  nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 10px;
-  }
-
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-  }
-
-  .logout-button, .back-button, .login-button {
-    font-size: 14px;
-    padding: 8px 15px;
-  }
-
-  nav a {
-    display: block;
-    padding: 10px;
-  }
 }
