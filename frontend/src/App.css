@@ -15,7 +15,8 @@ nav {
 
 body {
   font-family: 'Arial', sans-serif;
-  background: linear-gradient(135deg, #6eff99, #e2bf74);
+  background: no-repeat cover;
+
 }
 
 body.zh {
