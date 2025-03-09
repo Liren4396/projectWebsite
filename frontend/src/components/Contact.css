@@ -1,41 +1,42 @@
-/* 设置背景和居中容器 */
+/* 背景渐变 + 自适应高度 */
 .contact-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh; /* 适配小屏幕，避免溢出 */
+  padding: 20px; /* 适配移动端 */
   background: linear-gradient(135deg, #6e7dff, #80d0c7);
   font-family: 'Arial', sans-serif;
-  margin: 0; /* 去掉默认外边距 */
-}
-
-/* 内容框美化，增加间距调整 */
-.content-box {
-  background: #ffffff;
-  padding: 20px 30px; /* 减少上下间距，增加左右间距 */
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: center;
-  max-width: 600px;
-  width: 100%;
   box-sizing: border-box;
 }
 
-/* 调整标题位置和字体 */
-.content-box h1 {
-  font-size: 2rem;
-  color: #333;
-  margin-bottom: 15px; /* 减小标题和内容之间的间距 */
-  font-weight: 600;
-  margin-top: -10px; /* 使用负的 margin-top 将标题向上移动 */
+/* 内容框优化 */
+.content-box {
+  background: #ffffff;
+  padding: 20px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  max-width: 500px;
+  width: 90%; /* 适配小屏幕 */
+  box-sizing: border-box;
 }
 
-/* 文字样式 */
+/* 标题优化 */
+.content-box h1 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+/* 文字优化 */
 .content-box p {
-  font-size: 1.2rem;
+  font-size: 1rem;
   color: #555;
   margin-bottom: 10px;
   line-height: 1.5;
+  word-break: break-word; /* 适配小屏幕，防止超出 */
 }
 
 /* 链接样式 */
@@ -43,10 +44,30 @@ a {
   color: #007bff;
   text-decoration: none;
   font-weight: 500;
+  transition: color 0.3s ease-in-out;
 }
 
-/* 链接悬停效果 */
+/* 悬停和触摸反馈 */
 a:hover {
   text-decoration: underline;
   color: #0056b3;
+}
+a:active {
+  color: #003d80;
+}
+
+/* 响应式适配 */
+@media screen and (max-width: 600px) {
+  .content-box {
+    padding: 15px 20px; /* 调整内边距 */
+    max-width: 90%;
+  }
+
+  .content-box h1 {
+    font-size: 1.5rem; /* 减小标题字体 */
+  }
+
+  .content-box p {
+    font-size: 0.95rem; /* 调整字体大小 */
+  }
 }

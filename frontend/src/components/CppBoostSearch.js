@@ -1,6 +1,6 @@
 import React from "react";
 import { useLanguage } from './LanguageContext'; // 引入语言上下文
-import "./CppBoostSearch.css"; // 引入样式文件
+import "./ProjectSpecification.css"; // 引入样式文件
 
 function CppBoostSearch() {
   const { language } = useLanguage(); // 获取当前语言

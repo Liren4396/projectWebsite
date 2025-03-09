@@ -1,7 +1,7 @@
 // SuperTicTacToe.js
 import React from "react";
 import { useLanguage } from "./LanguageContext"; // 引入语言上下文
-import "./SuperTicTacToe.css"; // 引入样式文件
+import "./ProjectSpecification.css";
 
 function SuperTicTacToe() {
   const { language } = useLanguage(); // 获取当前语言

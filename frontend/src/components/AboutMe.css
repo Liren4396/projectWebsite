@@ -6,30 +6,48 @@
   color: #333333;
   border-radius: 10px;
   box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  display: flex; /* 使用 flexbox 布局 */
+  display: flex;
   flex-direction: column;
 }
 
-.title {
-  text-align: center; /* 确保标题文本居中 */
-  font-size: 26px;
-  margin-left: 250px;
-  font-weight: bold;
-  color: #222222;  /* 深一点的灰色 */
+.title-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-bottom: 20px;
+}
+
+.title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  color: #222222;
+  margin-left: 250px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid #3498db;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  margin-left: 200px;
 }
 
 .section {
   margin-bottom: 20px;
   padding: 15px;
-  background: #ffffff;  /* 白色卡片 */
+  background: #ffffff;
   border-radius: 8px;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .icon {
   font-size: 26px;
-  color: #3498db; /* 亮蓝色，让它更显眼 */
+  color: #3498db;
   margin-right: 10px;
 }
 
@@ -51,19 +69,34 @@ span {
   font-weight: bold;
 }
 
-.avatar {
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 5px solid #3498db;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  margin-left: 200px;
-}
-.title-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  margin-bottom: 20px;
+/* 响应式设计：适配移动端 */
+@media (max-width: 768px) {
+  .title-container {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .title {
+    font-size: 22px;
+    margin-left: 0;
+  }
+  
+  .avatar {
+    width: 120px;
+    height: 120px;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .section {
+    padding: 10px;
+  }
+  
+  p {
+    font-size: 16px;
+  }
+  
+  h3 {
+    font-size: 20px;
+  }
 }

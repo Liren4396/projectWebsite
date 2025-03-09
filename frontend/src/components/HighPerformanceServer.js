@@ -1,6 +1,6 @@
 import React from "react";
 import { useLanguage } from './LanguageContext';
-import "./HighPerformanceServer.css"; // 引入样式文件
+import "./ProjectSpecification.css"; // 引入样式文件
 
 function HighPerformanceServer() {
   const { language, toggleLanguage } = useLanguage();

@@ -1,6 +1,6 @@
 import React from "react";
 import { useLanguage } from './LanguageContext';
-import "./STP.css";
+import "./ProjectSpecification.css";
 
 function STPSimulation() {
   const { language } = useLanguage();
