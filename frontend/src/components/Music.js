@@ -3,7 +3,7 @@ import { useLanguage } from './LanguageContext';
 import './Music.css';
 
 const Music = () => {
-  const { language } = useLanguage();
+  const { language, toggleLanguage } = useLanguage();
   const audioRef = useRef(null);
   const [currentSong, setCurrentSong] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(-1);
@@ -317,14 +317,29 @@ const Music = () => {
     }}>
       <div className="music-header">
         <h1>{language === 'en' ? 'My Music Collection' : '我的音乐收藏'}</h1>
-        <div className="search-bar">
-          <input
-            type="text"
-            placeholder={language === 'en' ? 'Search songs...' : '搜索歌曲...'}
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            onClick={(e) => e.stopPropagation()} // 防止搜索框点击事件冒泡
-          />
+        <div className="header-controls">
+          <div className="search-bar">
+            <input
+              type="text"
+              placeholder={language === 'en' ? 'Search songs...' : '搜索歌曲...'}
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              onClick={(e) => e.stopPropagation()} // 防止搜索框点击事件冒泡
+            />
+          </div>
+          <button 
+            className="language-toggle-btn" 
+            onClick={(e) => {
+              e.stopPropagation();
+              toggleLanguage();
+            }}
+            title={language === 'en' ? 'Switch to Chinese' : '切换到英文'}
+          >
+            <span className="language-icon">🌐</span>
+            <span className="language-text">
+              {language === 'en' ? '中文' : 'EN'}
+            </span>
+          </button>
         </div>
       </div>
 
