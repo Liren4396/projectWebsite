@@ -6,10 +6,14 @@ const Music = () => {
   const { language } = useLanguage();
   const audioRef = useRef(null);
   const [currentSong, setCurrentSong] = useState(null);
+  const [currentIndex, setCurrentIndex] = useState(-1);
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [duration, setDuration] = useState(0);
   const [searchTerm, setSearchTerm] = useState('');
+  const [volume, setVolume] = useState(1);
+  const [playMode, setPlayMode] = useState('sequential'); // 'sequential', 'random', 'repeat'
+  const [shuffledPlaylist, setShuffledPlaylist] = useState([]);
 
   // 音乐列表 - 这里是你的所有歌曲
   const songs = [
@@ -120,33 +124,153 @@ const Music = () => {
     song.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  // 初始化随机播放列表
+  useEffect(() => {
+    if (playMode === 'random') {
+      const shuffled = [...filteredSongs].sort(() => Math.random() - 0.5);
+      setShuffledPlaylist(shuffled);
+    }
+  }, [playMode, filteredSongs]);
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
 
     const updateTime = () => setCurrentTime(audio.currentTime);
     const updateDuration = () => setDuration(audio.duration);
+    const handleEnded = () => {
+      setIsPlaying(false);
+      handleNextSong();
+    };
 
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
+    audio.addEventListener('ended', handleEnded);
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
+      audio.removeEventListener('ended', handleEnded);
     };
-  }, [currentSong]);
+  }, [currentSong, playMode, filteredSongs, shuffledPlaylist]);
+
+  // 设置音量
+  useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.volume = volume;
+    }
+  }, [volume]);
+
+  const getCurrentPlaylist = () => {
+    return playMode === 'random' ? shuffledPlaylist : filteredSongs;
+  };
 
   const playSong = (song) => {
+    const playlist = getCurrentPlaylist();
+    const index = playlist.indexOf(song);
+    
     if (currentSong === song && isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
       if (currentSong !== song) {
         setCurrentSong(song);
+        setCurrentIndex(index);
         audioRef.current.src = `/music/${song}`;
       }
       audioRef.current.play();
       setIsPlaying(true);
+    }
+  };
+
+  const togglePlayPause = () => {
+    if (currentSong) {
+      if (isPlaying) {
+        audioRef.current.pause();
+        setIsPlaying(false);
+      } else {
+        audioRef.current.play();
+        setIsPlaying(true);
+      }
+    }
+  };
+
+  const handleNextSong = () => {
+    const playlist = getCurrentPlaylist();
+    if (playlist.length === 0) return;
+
+    let nextIndex;
+    if (playMode === 'repeat') {
+      // 单曲循环，重复当前歌曲
+      nextIndex = currentIndex;
+    } else {
+      // 顺序或随机播放下一首
+      nextIndex = (currentIndex + 1) % playlist.length;
+    }
+
+    const nextSong = playlist[nextIndex];
+    setCurrentSong(nextSong);
+    setCurrentIndex(nextIndex);
+    audioRef.current.src = `/music/${nextSong}`;
+    if (isPlaying || playMode === 'repeat') {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  const handlePrevSong = () => {
+    const playlist = getCurrentPlaylist();
+    if (playlist.length === 0) return;
+
+    let prevIndex;
+    if (playMode === 'repeat') {
+      // 单曲循环，重复当前歌曲
+      prevIndex = currentIndex;
+    } else {
+      // 顺序或随机播放上一首
+      prevIndex = currentIndex <= 0 ? playlist.length - 1 : currentIndex - 1;
+    }
+
+    const prevSong = playlist[prevIndex];
+    setCurrentSong(prevSong);
+    setCurrentIndex(prevIndex);
+    audioRef.current.src = `/music/${prevSong}`;
+    if (isPlaying) {
+      audioRef.current.play();
+      setIsPlaying(true);
+    }
+  };
+
+  const togglePlayMode = () => {
+    const modes = ['sequential', 'random', 'repeat'];
+    const currentModeIndex = modes.indexOf(playMode);
+    const nextMode = modes[(currentModeIndex + 1) % modes.length];
+    setPlayMode(nextMode);
+  };
+
+  const getPlayModeIcon = () => {
+    switch (playMode) {
+      case 'sequential':
+        return '🔁';
+      case 'random':
+        return '🔀';
+      case 'repeat':
+        return '🔂';
+      default:
+        return '🔁';
+    }
+  };
+
+  const getPlayModeText = () => {
+    switch (playMode) {
+      case 'sequential':
+        return language === 'en' ? 'Sequential' : '顺序播放';
+      case 'random':
+        return language === 'en' ? 'Random' : '随机播放';
+      case 'repeat':
+        return language === 'en' ? 'Repeat One' : '单曲循环';
+      default:
+        return language === 'en' ? 'Sequential' : '顺序播放';
     }
   };
 
@@ -162,6 +286,11 @@ const Music = () => {
     const newTime = (e.target.value / 100) * duration;
     audio.currentTime = newTime;
     setCurrentTime(newTime);
+  };
+
+  const handleVolumeChange = (e) => {
+    const newVolume = e.target.value / 100;
+    setVolume(newVolume);
   };
 
   const getSongTitle = (filename) => {
@@ -184,9 +313,16 @@ const Music = () => {
 
       {currentSong && (
         <div className="now-playing">
-          <h3>{language === 'en' ? 'Now Playing:' : '正在播放:'}</h3>
-          <div className="current-song-info">
+          <div className="song-artwork">
+            <div className="vinyl-record">
+              <div className="record-center"></div>
+            </div>
+          </div>
+          
+          <div className="song-details">
+            <h3>{language === 'en' ? 'Now Playing' : '正在播放'}</h3>
             <div className="song-title">{getSongTitle(currentSong)}</div>
+            
             <div className="progress-container">
               <span className="time">{formatTime(currentTime)}</span>
               <input
@@ -198,6 +334,37 @@ const Music = () => {
                 onChange={handleProgressChange}
               />
               <span className="time">{formatTime(duration)}</span>
+            </div>
+
+            <div className="player-controls">
+              <button className="control-btn mode-btn" onClick={togglePlayMode} title={getPlayModeText()}>
+                <span className="mode-icon">{getPlayModeIcon()}</span>
+                <span className="mode-text">{getPlayModeText()}</span>
+              </button>
+              
+              <div className="main-controls">
+                <button className="control-btn" onClick={handlePrevSong}>
+                  ⏮️
+                </button>
+                <button className="control-btn play-btn" onClick={togglePlayPause}>
+                  {isPlaying ? '⏸️' : '▶️'}
+                </button>
+                <button className="control-btn" onClick={handleNextSong}>
+                  ⏭️
+                </button>
+              </div>
+
+              <div className="volume-control">
+                <span className="volume-icon">🔊</span>
+                <input
+                  type="range"
+                  className="volume-slider"
+                  min="0"
+                  max="100"
+                  value={volume * 100}
+                  onChange={handleVolumeChange}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -223,7 +390,7 @@ const Music = () => {
         </div>
       </div>
 
-      <audio ref={audioRef} onEnded={() => setIsPlaying(false)} />
+      <audio ref={audioRef} />
     </div>
   );
 };
