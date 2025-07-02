@@ -9,6 +9,7 @@ import STPSimulation from './components/STP';
 import CppBoostSearch from './components/CppBoostSearch';
 import Login from './components/Login';
 import Register from './components/Register';
+import Music from './components/Music';
 import { UserProvider, useUser } from './components/UserContext'; // 引入 UserContext
 import { LanguageProvider, useLanguage } from './components/LanguageContext';
 import ShellGitConstruction from './components/ShellGitConstruction';
@@ -28,6 +29,7 @@ function Navigation() {
 
   const isAboutPage = location.pathname === '/about';
   const isProjectPage = location.pathname.startsWith('/projects/');
+  const isMusicPage = location.pathname === '/music';
 
   return (
     <nav>
@@ -37,10 +39,15 @@ function Navigation() {
         </button>
       ) : isProjectPage ? (
         <button onClick={() => navigate('/projects')} className="back-button">Back</button>
+      ) : isMusicPage ? (
+        <button onClick={() => navigate('/')} className="back-button">
+          {language === 'en' ? 'Back' : '返回'}
+        </button>
       ) : (
         <>
           <Link to="/">{language === 'en' ? 'Home' : '首页'}</Link>
           <Link to="/projects">{language === 'en' ? 'Projects' : '项目'}</Link>
+          <Link to="/music">{language === 'en' ? 'Music' : '音乐'}</Link>
           <Link to="/contact">{language === 'en' ? 'Contact' : '联系我'}</Link>
           {!user ? (
             <>
@@ -66,6 +73,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/projects" element={<Projects />} />
+              <Route path="/music" element={<Music />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/about" element={<AboutMe />} />
               <Route path="/projects/HighPerformanceServer" element={<HighPerformanceServer />} />
