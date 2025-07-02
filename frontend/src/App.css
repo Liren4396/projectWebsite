@@ -6,6 +6,8 @@ nav {
   padding: 10px 20px;
   background-color: #333;
   align-items: center;
+  position: relative;
+  z-index: 9999; /* 确保导航栏始终在最顶层 */
 }
 
 .nav-links {
@@ -35,6 +37,9 @@ body.zh {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
+  pointer-events: auto; /* 确保按钮可以接收点击事件 */
+  position: relative;
+  z-index: 10000;
 }
 
 .back-button {
@@ -48,6 +53,9 @@ body.zh {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
+  pointer-events: auto; /* 确保按钮可以接收点击事件 */
+  position: relative;
+  z-index: 10000;
 }
 
 .login-button {
@@ -61,6 +69,9 @@ body.zh {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
   box-shadow: 0 4px 8px rgba(255, 117, 140, 0.3);
+  pointer-events: auto; /* 确保按钮可以接收点击事件 */
+  position: relative;
+  z-index: 10000;
 }
 
 .logout-button:hover {

@@ -143,14 +143,25 @@ const Music = () => {
       handleNextSong();
     };
 
+    // 阻止音频元素的某些事件冒泡到父级
+    const preventEventBubbling = (e) => {
+      e.stopPropagation();
+    };
+
     audio.addEventListener('timeupdate', updateTime);
     audio.addEventListener('loadedmetadata', updateDuration);
     audio.addEventListener('ended', handleEnded);
+    
+    // 阻止音频相关事件干扰其他UI元素
+    audio.addEventListener('click', preventEventBubbling);
+    audio.addEventListener('touchstart', preventEventBubbling);
 
     return () => {
       audio.removeEventListener('timeupdate', updateTime);
       audio.removeEventListener('loadedmetadata', updateDuration);
       audio.removeEventListener('ended', handleEnded);
+      audio.removeEventListener('click', preventEventBubbling);
+      audio.removeEventListener('touchstart', preventEventBubbling);
     };
   }, [currentSong, playMode, filteredSongs, shuffledPlaylist]);
 
@@ -298,7 +309,12 @@ const Music = () => {
   };
 
   return (
-    <div className="music-container">
+    <div className="music-container" onClick={(e) => {
+      // 只在点击容器本身时处理，不处理子元素的事件
+      if (e.target === e.currentTarget) {
+        e.stopPropagation();
+      }
+    }}>
       <div className="music-header">
         <h1>{language === 'en' ? 'My Music Collection' : '我的音乐收藏'}</h1>
         <div className="search-bar">
@@ -307,6 +323,7 @@ const Music = () => {
             placeholder={language === 'en' ? 'Search songs...' : '搜索歌曲...'}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
+            onClick={(e) => e.stopPropagation()} // 防止搜索框点击事件冒泡
           />
         </div>
       </div>

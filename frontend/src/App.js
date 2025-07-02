@@ -21,10 +21,29 @@ function Navigation() {
   const navigate = useNavigate();
   const { user, setUser } = useUser(); // 使用 UserContext 获取和更新 user 状态
   const { language } = useLanguage(); // Use the useLanguage hook
+  
   const handleLogout = () => {
     localStorage.removeItem('user');
     setUser(null); // 更新用户状态
     navigate('/');
+  };
+
+  // 强制导航函数，确保在任何情况下都能正常工作
+  const forceNavigate = (path) => {
+    try {
+      // 停止任何可能的事件冒泡
+      navigate(path);
+      // 备用方案：如果React Router失效，使用原生导航
+      setTimeout(() => {
+        if (window.location.pathname !== path) {
+          window.location.href = path;
+        }
+      }, 100);
+    } catch (error) {
+      console.error('Navigation error:', error);
+      // 最后的备用方案
+      window.location.href = path;
+    }
   };
 
   const isAboutPage = location.pathname === '/about';
@@ -34,13 +53,43 @@ function Navigation() {
   return (
     <nav>
       {isAboutPage ? (
-        <button onClick={() => navigate('/')} className="back-button">
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            forceNavigate('/');
+          }} 
+          className="back-button"
+          onMouseDown={(e) => e.stopPropagation()} // 额外的事件处理
+          onTouchStart={(e) => e.stopPropagation()} // 移动设备支持
+        >
           {language === 'en' ? 'Back' : '返回'}
         </button>
       ) : isProjectPage ? (
-        <button onClick={() => navigate('/projects')} className="back-button">Back</button>
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            forceNavigate('/projects');
+          }} 
+          className="back-button"
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
+          Back
+        </button>
       ) : isMusicPage ? (
-        <button onClick={() => navigate('/')} className="back-button">
+        <button 
+          onClick={(e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('Back button clicked from music page'); // 调试日志
+            forceNavigate('/');
+          }} 
+          className="back-button"
+          onMouseDown={(e) => e.stopPropagation()}
+          onTouchStart={(e) => e.stopPropagation()}
+        >
           {language === 'en' ? 'Back' : '返回'}
         </button>
       ) : (

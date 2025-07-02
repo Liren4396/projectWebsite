@@ -6,6 +6,8 @@
   min-height: 100vh;
   color: white;
   font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  position: relative;
+  z-index: 1;
 }
 
 .music-header {
@@ -65,6 +67,8 @@
   gap: 30px;
   align-items: center;
   box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  position: relative;
+  z-index: 2;
 }
 
 .song-artwork {
@@ -369,6 +373,8 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 15px 35px rgba(0,0,0,0.1);
   overflow: hidden;
+  position: relative;
+  z-index: 2;
 }
 
 .playlist-header {
