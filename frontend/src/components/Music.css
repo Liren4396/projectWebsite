@@ -217,31 +217,68 @@
   justify-content: flex-end;
 }
 
-.mode-btn {
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px solid rgba(255, 255, 255, 0.15);
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
+.mode-selector {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.mode-label {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  text-align: center;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.mode-options {
+  display: flex;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 20px;
+  padding: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.mode-option {
+  background: transparent;
+  border: none;
+  border-radius: 16px;
+  padding: 8px 12px;
   cursor: pointer;
   transition: all 0.3s ease;
-  font-size: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 55px;
   color: white;
-  backdrop-filter: blur(10px);
 }
 
-.mode-btn:hover {
-  background: rgba(255, 255, 255, 0.15);
-  border-color: rgba(255, 255, 255, 0.3);
-  transform: translateY(-1px);
+.mode-option:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.mode-icon {
-  font-size: 1.4rem;
-  font-weight: bold;
+.mode-option.active {
+  background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.3);
+}
+
+.mode-option .mode-icon {
+  font-size: 1.2rem;
+  display: block;
+}
+
+.mode-option .mode-text {
+  font-size: 0.7rem;
+  font-weight: 500;
+  opacity: 0.9;
+}
+
+.mode-option.active .mode-text {
+  opacity: 1;
+  font-weight: 600;
 }
 
 .main-controls {
@@ -534,12 +571,34 @@
 
   .player-controls {
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     width: 100%;
   }
 
   .left-controls, .right-controls {
     justify-content: center;
+  }
+
+  .mode-selector {
+    align-items: center;
+  }
+
+  .mode-options {
+    gap: 4px;
+    padding: 3px;
+  }
+
+  .mode-option {
+    min-width: 50px;
+    padding: 6px 10px;
+  }
+
+  .mode-option .mode-icon {
+    font-size: 1.1rem;
+  }
+
+  .mode-option .mode-text {
+    font-size: 0.65rem;
   }
 
   .playlist-header {
@@ -602,9 +661,17 @@
     height: 55px;
   }
 
-  .mode-btn {
-    width: 40px;
-    height: 40px;
+  .mode-option {
+    min-width: 45px;
+    padding: 5px 8px;
+  }
+
+  .mode-option .mode-icon {
+    font-size: 1rem;
+  }
+
+  .mode-option .mode-text {
+    font-size: 0.6rem;
   }
 
   .song-item {

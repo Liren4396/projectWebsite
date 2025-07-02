@@ -251,26 +251,26 @@ const Music = () => {
   const getPlayModeIcon = () => {
     switch (playMode) {
       case 'sequential':
-        return '↻';
+        return '🔄';
       case 'random':
-        return '⥁';
+        return '🔀';
       case 'repeat':
-        return '↺';
+        return '🔁';
       default:
-        return '↻';
+        return '🔄';
     }
   };
 
   const getPlayModeText = () => {
     switch (playMode) {
       case 'sequential':
-        return language === 'en' ? 'Order' : '顺序';
+        return language === 'en' ? 'Sequential' : '顺序播放';
       case 'random':
-        return language === 'en' ? 'Shuffle' : '随机';
+        return language === 'en' ? 'Shuffle' : '随机播放';
       case 'repeat':
-        return language === 'en' ? 'Repeat' : '循环';
+        return language === 'en' ? 'Repeat One' : '单曲循环';
       default:
-        return language === 'en' ? 'Order' : '顺序';
+        return language === 'en' ? 'Sequential' : '顺序播放';
     }
   };
 
@@ -338,9 +338,37 @@ const Music = () => {
 
             <div className="player-controls">
               <div className="left-controls">
-                <button className="mode-btn" onClick={togglePlayMode} title={getPlayModeText()}>
-                  <span className="mode-icon">{getPlayModeIcon()}</span>
-                </button>
+                <div className="mode-selector">
+                  <div className="mode-label">
+                    {language === 'en' ? 'Mode' : '播放模式'}
+                  </div>
+                  <div className="mode-options">
+                    <button 
+                      className={`mode-option ${playMode === 'sequential' ? 'active' : ''}`}
+                      onClick={() => setPlayMode('sequential')}
+                      title={language === 'en' ? 'Sequential Play' : '顺序播放'}
+                    >
+                      <span className="mode-icon">🔄</span>
+                      <span className="mode-text">{language === 'en' ? 'Order' : '顺序'}</span>
+                    </button>
+                    <button 
+                      className={`mode-option ${playMode === 'random' ? 'active' : ''}`}
+                      onClick={() => setPlayMode('random')}
+                      title={language === 'en' ? 'Shuffle Play' : '随机播放'}
+                    >
+                      <span className="mode-icon">🔀</span>
+                      <span className="mode-text">{language === 'en' ? 'Shuffle' : '随机'}</span>
+                    </button>
+                    <button 
+                      className={`mode-option ${playMode === 'repeat' ? 'active' : ''}`}
+                      onClick={() => setPlayMode('repeat')}
+                      title={language === 'en' ? 'Repeat One' : '单曲循环'}
+                    >
+                      <span className="mode-icon">🔁</span>
+                      <span className="mode-text">{language === 'en' ? 'Repeat' : '循环'}</span>
+                    </button>
+                  </div>
+                </div>
               </div>
               
               <div className="main-controls">
