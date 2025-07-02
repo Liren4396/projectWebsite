@@ -251,26 +251,26 @@ const Music = () => {
   const getPlayModeIcon = () => {
     switch (playMode) {
       case 'sequential':
-        return '🔁';
+        return '↻';
       case 'random':
-        return '🔀';
+        return '⥁';
       case 'repeat':
-        return '🔂';
+        return '↺';
       default:
-        return '🔁';
+        return '↻';
     }
   };
 
   const getPlayModeText = () => {
     switch (playMode) {
       case 'sequential':
-        return language === 'en' ? 'Sequential' : '顺序播放';
+        return language === 'en' ? 'Order' : '顺序';
       case 'random':
-        return language === 'en' ? 'Random' : '随机播放';
+        return language === 'en' ? 'Shuffle' : '随机';
       case 'repeat':
-        return language === 'en' ? 'Repeat One' : '单曲循环';
+        return language === 'en' ? 'Repeat' : '循环';
       default:
-        return language === 'en' ? 'Sequential' : '顺序播放';
+        return language === 'en' ? 'Order' : '顺序';
     }
   };
 
@@ -337,41 +337,65 @@ const Music = () => {
             </div>
 
             <div className="player-controls">
-              <button className="control-btn mode-btn" onClick={togglePlayMode} title={getPlayModeText()}>
-                <span className="mode-icon">{getPlayModeIcon()}</span>
-                <span className="mode-text">{getPlayModeText()}</span>
-              </button>
+              <div className="left-controls">
+                <button className="mode-btn" onClick={togglePlayMode} title={getPlayModeText()}>
+                  <span className="mode-icon">{getPlayModeIcon()}</span>
+                </button>
+              </div>
               
               <div className="main-controls">
                 <button className="control-btn" onClick={handlePrevSong}>
-                  ⏮️
+                  ⏮
                 </button>
                 <button className="control-btn play-btn" onClick={togglePlayPause}>
-                  {isPlaying ? '⏸️' : '▶️'}
+                  {isPlaying ? '⏸' : '▶'}
                 </button>
                 <button className="control-btn" onClick={handleNextSong}>
-                  ⏭️
+                  ⏭
                 </button>
               </div>
 
-              <div className="volume-control">
-                <span className="volume-icon">🔊</span>
-                <input
-                  type="range"
-                  className="volume-slider"
-                  min="0"
-                  max="100"
-                  value={volume * 100}
-                  onChange={handleVolumeChange}
-                />
+              <div className="right-controls">
+                <div className="volume-control">
+                  <span className="volume-icon">🔊</span>
+                  <input
+                    type="range"
+                    className="volume-slider"
+                    min="0"
+                    max="100"
+                    value={volume * 100}
+                    onChange={handleVolumeChange}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
 
-      <div className="playlist">
-        <h3>{language === 'en' ? 'Playlist' : '播放列表'} ({filteredSongs.length} {language === 'en' ? 'songs' : '首歌曲'})</h3>
+      <div className="playlist-section">
+        <div className="playlist-header">
+          <div className="playlist-info">
+            <h2 className="playlist-name">2025</h2>
+            <p className="playlist-description">
+              {language === 'en' ? 'My Favorite Collection' : '我的精选收藏'}
+            </p>
+            <span className="song-count">
+              {filteredSongs.length} {language === 'en' ? 'tracks' : '首歌曲'}
+            </span>
+          </div>
+          <div className="playlist-actions">
+            <button className="play-all-btn" onClick={() => {
+              if (filteredSongs.length > 0) {
+                playSong(filteredSongs[0]);
+              }
+            }}>
+              <span className="play-icon">▶</span>
+              <span>{language === 'en' ? 'Play All' : '播放全部'}</span>
+            </button>
+          </div>
+        </div>
+
         <div className="song-list">
           {filteredSongs.map((song, index) => (
             <div
@@ -379,11 +403,23 @@ const Music = () => {
               className={`song-item ${currentSong === song ? 'active' : ''}`}
               onClick={() => playSong(song)}
             >
+              <div className="song-number">
+                {currentSong === song && isPlaying ? (
+                  <div className="playing-indicator">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                ) : (
+                  <span className="track-number">{index + 1}</span>
+                )}
+              </div>
               <div className="song-info">
                 <div className="song-title">{getSongTitle(song)}</div>
               </div>
+              <div className="song-duration">3:24</div>
               <div className="play-button">
-                {currentSong === song && isPlaying ? '⏸️' : '▶️'}
+                {currentSong === song && isPlaying ? '⏸' : '▶'}
               </div>
             </div>
           ))}
